@@ -1,0 +1,5 @@
+tar -xvf apache-tez-0.9.0-src.tar.gz
+rm -rf apache-tez-0.9.0-src/pom.xml
+cp pom.xml apache-tez-0.9.0-src/
+cd apache-tez-0.9.0-src
+mvn -X clean package -DskipTests=true -Dhadoop.version=3.1.2 -Phadoop28 -P\!hadoop27 -Dprotoc.path=/hadoop/tools/protobuf-2.5.0/bin/protoc -Dmaven.javadoc.skip=true

@@ -1,0 +1,39 @@
+#!/usr/local/bin/expect
+####################################
+# Name  : sshLoginTest.exp
+# Desc   : auto switch to usr($argv 0) with password($argv 1)
+#             and host($argv 2)
+#             and execute cmd($argv 3)
+# Use     : /usr/local/bin/expect sshLoginTest.exp root *** "pwd"
+####################################
+set user [ lindex $argv 0 ]
+set passwd [ lindex $argv 1 ]
+set host [ lindex $argv 2 ]
+set cmd [ lindex $argv 3 ]
+set timeout -1
+spawn ssh $user@$host
+expect {
+    "continue connecting (yes/no)? " {
+            send "yes\n";
+            exp_continue;
+    }
+	"password: " {
+            send "$passwd\n";
+            exp_continue;
+    }
+    "*]# " { }
+    "*]$ " { }
+}
+
+send "$cmd\n"
+expect {
+    "*]# " { }
+    "*]$ " { }
+}
+
+send "exit\n"
+expect {
+    "*]# " { }
+    "*]$ " { }
+}
+return 0;
