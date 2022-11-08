@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 # The java implementation to use. If JAVA_HOME is not found we expect java and jar to be in path
-export JAVA_HOME=/hadoop/JDK/jdk1.8.0_321
+#export JAVA_HOME=
 
 # any additional java opts you want to set. This will apply to both client and server operations
 #export ATLAS_OPTS=
